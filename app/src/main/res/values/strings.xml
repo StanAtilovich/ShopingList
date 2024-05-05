@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ShopingList</string>
+    <string name="settings">Настройки</string>
+    <string name="notes">Записки</string>
+    <string name="shop_list">Лист покупок</string>
+    <string name="new_item">Новое</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
