@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import ru.stan.shopinglist.R
 
 object FragmentManager {
-    private var currentFragment: BaseFragment? = null
+    var currentFragment: BaseFragment? = null
 
     fun setFragment(newFrag: BaseFragment, activity: AppCompatActivity) {
         val transaction = activity.supportFragmentManager.beginTransaction()

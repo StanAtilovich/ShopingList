@@ -14,6 +14,9 @@
         android:theme="@style/Theme.ShopingList"
         tools:targetApi="31">
         <activity
+            android:name=".activityes.NewNoteActivity"
+            android:exported="false" />
+        <activity
             android:name=".activityes.MainActivity"
             android:exported="true">
             <intent-filter>
