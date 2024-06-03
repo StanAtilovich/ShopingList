@@ -29,6 +29,9 @@ class NoteAdapter(private val listener: Listener) : ListAdapter<NoteItem, NoteAd
             imDelete.setOnClickListener {
                 listener.deleteItem(note.id!!)
             }
+            itemView.setOnClickListener {
+                listener.onClickItem(note)
+            }
         }
 
         companion object {
@@ -54,6 +57,7 @@ class NoteAdapter(private val listener: Listener) : ListAdapter<NoteItem, NoteAd
 
     interface Listener{
         fun deleteItem(id: Int)
+        fun onClickItem(note: NoteItem)
     }
 
 
