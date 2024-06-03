@@ -23,16 +23,21 @@ class NewNoteActivity : AppCompatActivity() {
         actionBarSettings()
         getNote()
     }
+    fun updateNote(): NoteItem? = with(binding){
+        return note?.copy(title = edTitle.text.toString(),
+            content = edDiscription.text.toString())
+    }
 
     private fun getNote(){
-        note = intent.getSerializableExtra(NoteFragment.NEW_NOTE_KEY) as NoteItem
+        val sNote = intent.getSerializableExtra(NoteFragment.NEW_NOTE_KEY)
+        if (sNote != null)
+        note = sNote as NoteItem
         fillNote()
     }
     private fun fillNote() = with(binding){
-        if (note != null){
-            edTitle.setText(note?.title)
+                    edTitle.setText(note?.title)
             edDiscription.setText(note?.content)
-        }
+
     }
 
 
@@ -52,8 +57,17 @@ class NewNoteActivity : AppCompatActivity() {
     }
 
     private fun setMainResult() {
+        var editState = "new"
+        val tempNote: NoteItem? =
+        if (note == null){
+            createNewNote()
+        } else {
+            editState = "update"
+            updateNote()
+        }
         val i = Intent().apply {
-            putExtra(NoteFragment.NEW_NOTE_KEY, createNewNote())
+            putExtra(NoteFragment.NEW_NOTE_KEY, tempNote)
+            putExtra(NoteFragment.EDIT_STATE_KEY, editState)
         }
         setResult(RESULT_OK, i)
         finish()
