@@ -1,10 +1,15 @@
 package ru.stan.shopinglist.activityes
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
+import android.text.Spannable
+import android.text.style.StyleSpan
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.text.getSpans
 import ru.stan.shopinglist.R
 import ru.stan.shopinglist.databinding.ActivityNewNoteBinding
 import ru.stan.shopinglist.entities.NoteItem
@@ -28,6 +33,7 @@ class NewNoteActivity : AppCompatActivity() {
             content = edDiscription.text.toString())
     }
 
+    @SuppressLint("SuspiciousIndentation")
     private fun getNote(){
         val sNote = intent.getSerializableExtra(NoteFragment.NEW_NOTE_KEY)
         if (sNote != null)
@@ -52,8 +58,28 @@ class NewNoteActivity : AppCompatActivity() {
         } else if (
             item.itemId == android.R.id.home) {
             finish()
+        } else if (
+            item.itemId == R.id.bold
+        ){
+            setBoldForSelectedText()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun setBoldForSelectedText() = with(binding) {
+        val startPos = edDiscription.selectionStart
+        val endPos = edDiscription.selectionEnd
+        val styles = edDiscription.text.getSpans(startPos, endPos, StyleSpan::class.java)
+        var boldStyle: StyleSpan? = null
+        if (styles.isNotEmpty()){
+            edDiscription.text.removeSpan(styles[0])
+        } else {
+            boldStyle = StyleSpan(Typeface.BOLD)
+        }
+
+        edDiscription.text.setSpan(boldStyle, startPos, endPos, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE)
+        edDiscription.text.trim()
+        edDiscription.setSelection(startPos)
     }
 
     private fun setMainResult() {
