@@ -1,5 +1,7 @@
 package ru.stan.shopinglist.activityes
 
+import android.animation.Animator
+import android.animation.Animator.AnimatorListener
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.graphics.Typeface
@@ -8,8 +10,10 @@ import android.text.Spannable
 import android.text.style.StyleSpan
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.text.getSpans
 import ru.stan.shopinglist.R
 import ru.stan.shopinglist.databinding.ActivityNewNoteBinding
 import ru.stan.shopinglist.entities.NoteItem
@@ -64,6 +68,13 @@ class NewNoteActivity : AppCompatActivity() {
         ){
             setBoldForSelectedText()
         }
+        else if (item.itemId == R.id.color){
+           if (binding.colorPicker.isShown){
+                closeColorPicker()
+            } else {
+                openColorPicker()
+            }
+       }
         return super.onOptionsItemSelected(item)
     }
 
@@ -118,5 +129,46 @@ class NewNoteActivity : AppCompatActivity() {
     private fun actionBarSettings() {
         val ab = supportActionBar
         ab?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    private fun openColorPicker(){
+    binding.colorPicker.visibility = View.VISIBLE
+    val openAnim = AnimationUtils.loadAnimation(this, R.anim.open_color_picker)
+    binding.colorPicker.startAnimation(openAnim)
+    }
+
+    private fun closeColorPicker(){
+        val openAnim = AnimationUtils.loadAnimation(this, R.anim.close_color_picker)
+        openAnim.setAnimationListener(object : AnimatorListener, Animation.AnimationListener {
+            override fun onAnimationStart(p0: Animator) {
+
+            }
+
+            override fun onAnimationEnd(p0: Animator) {
+
+            }
+
+            override fun onAnimationCancel(p0: Animator) {
+
+            }
+
+            override fun onAnimationRepeat(p0: Animator) {
+
+            }
+
+            override fun onAnimationStart(p0: Animation?) {
+
+            }
+
+            override fun onAnimationEnd(p0: Animation?) {
+                binding.colorPicker.visibility = View.GONE
+            }
+
+            override fun onAnimationRepeat(p0: Animation?) {
+
+            }
+
+        })
+        binding.colorPicker.startAnimation(openAnim)
     }
 }
