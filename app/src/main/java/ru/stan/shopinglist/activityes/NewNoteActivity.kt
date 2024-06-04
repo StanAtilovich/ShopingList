@@ -14,6 +14,7 @@ import ru.stan.shopinglist.R
 import ru.stan.shopinglist.databinding.ActivityNewNoteBinding
 import ru.stan.shopinglist.entities.NoteItem
 import ru.stan.shopinglist.fragments.NoteFragment
+import ru.stan.shopinglist.utils.HtmlManager
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -28,9 +29,9 @@ class NewNoteActivity : AppCompatActivity() {
         actionBarSettings()
         getNote()
     }
-    fun updateNote(): NoteItem? = with(binding){
+    private fun updateNote(): NoteItem? = with(binding){
         return note?.copy(title = edTitle.text.toString(),
-            content = edDiscription.text.toString())
+            content = HtmlManager.toHtml(edDiscription.text))
     }
 
     @SuppressLint("SuspiciousIndentation")
@@ -42,7 +43,7 @@ class NewNoteActivity : AppCompatActivity() {
     }
     private fun fillNote() = with(binding){
                     edTitle.setText(note?.title)
-            edDiscription.setText(note?.content)
+            edDiscription.setText(HtmlManager.getFromHtml(note?.content!!).trim())
 
     }
 
@@ -108,7 +109,7 @@ class NewNoteActivity : AppCompatActivity() {
         return NoteItem(
             null,
             binding.edTitle.text.toString(),
-            binding.edDiscription.text.toString(),
+            HtmlManager.toHtml(binding.edDiscription.text),
             getCurrentTime(),
             ""
         )
