@@ -10,4 +10,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="bold">Жирный шрифт</string>
     <string name="color">Цвет</string>
+    <string name="new_list_name">Название нового списка</string>
+    <string name="list_name">Название списка</string>
+    <string name="list_name_save">Сохранить</string>
 </resources>

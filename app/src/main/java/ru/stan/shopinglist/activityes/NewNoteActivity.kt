@@ -88,9 +88,9 @@ class NewNoteActivity : AppCompatActivity() {
 
     private fun fillNote() = with(binding) {
         edTitle.setText(note?.title)
-        edDiscription.setText(HtmlManager.getFromHtml(note?.content!!).trim())
-
+        note?.content?.let { edDiscription.setText(HtmlManager.getFromHtml(it).trim()) }
     }
+
 
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
