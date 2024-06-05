@@ -19,6 +19,7 @@ import ru.stan.shopinglist.databinding.ActivityNewNoteBinding
 import ru.stan.shopinglist.entities.NoteItem
 import ru.stan.shopinglist.fragments.NoteFragment
 import ru.stan.shopinglist.utils.HtmlManager
+import ru.stan.shopinglist.utils.MyTouchListener
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -32,6 +33,12 @@ class NewNoteActivity : AppCompatActivity() {
         setContentView(binding.root)
         actionBarSettings()
         getNote()
+        init()
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private fun init(){
+        binding.colorPicker.setOnTouchListener(MyTouchListener())
     }
     private fun updateNote(): NoteItem? = with(binding){
         return note?.copy(title = edTitle.text.toString(),
