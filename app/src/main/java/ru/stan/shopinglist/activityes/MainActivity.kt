@@ -8,6 +8,7 @@ import ru.stan.shopinglist.databinding.ActivityMainBinding
 import ru.stan.shopinglist.dialogs.NewListDialog
 import ru.stan.shopinglist.fragments.FragmentManager
 import ru.stan.shopinglist.fragments.NoteFragment
+import ru.stan.shopinglist.fragments.ShopListNameFragment
 
 class MainActivity : AppCompatActivity(), NewListDialog.Listener {
     lateinit var binding: ActivityMainBinding
@@ -15,6 +16,7 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        FragmentManager.setFragment(ShopListNameFragment.newInstance(), this)
         setBottomNavigationListener()
     }
 
@@ -30,12 +32,12 @@ class MainActivity : AppCompatActivity(), NewListDialog.Listener {
                 }
 
                 R.id.shop_list -> {
-                    Log.d("MyLog", "shop_list ")
+                    FragmentManager.setFragment(ShopListNameFragment.newInstance(), this)
                 }
 
                 R.id.new_item -> {
-                   // FragmentManager.currentFragment?.onClickNew()
-                    NewListDialog.showDialog(this, this)
+                    FragmentManager.currentFragment?.onClickNew()
+
                 }
             }
             true
