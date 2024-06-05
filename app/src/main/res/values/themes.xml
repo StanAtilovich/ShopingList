@@ -8,4 +8,15 @@
     </style>
 
     <style name="Theme.ShopingList" parent="Base.Theme.ShopingList" />
+
+
+    <style name="Theme.NewNote" parent="Base.Theme.ShopingList">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/green</item>
+
+    </style>
+
+
+
 </resources>
