@@ -22,6 +22,8 @@ import ru.stan.shopinglist.db.MainViewModel
 import ru.stan.shopinglist.db.NoteAdapter
 import ru.stan.shopinglist.dialogs.NewListDialog
 import ru.stan.shopinglist.entities.NoteItem
+import ru.stan.shopinglist.entities.ShoppingListName
+import ru.stan.shopinglist.utils.TimeManager
 
 
 class ShopListNameFragment : BaseFragment() {
@@ -39,7 +41,13 @@ class ShopListNameFragment : BaseFragment() {
     override fun onClickNew() {
         NewListDialog.showDialog(activity as AppCompatActivity, object : NewListDialog.Listener {
             override fun onClick(name: String) {
-                Log.d("MyLog", "ShoppingList:$name ")
+               val shopingListName = ShoppingListName(
+                   null,
+                   name,
+                   TimeManager.getCurrentTime(),
+                   0,0,""
+               )
+                mainViewModel.insertShopListName(shopingListName)
             }
 
         })
@@ -56,7 +64,7 @@ class ShopListNameFragment : BaseFragment() {
     }
 
     private fun observer() {
-        mainViewModel.allNotes.observe(viewLifecycleOwner) {
+        mainViewModel.allShopListNames.observe(viewLifecycleOwner) {
         }
     }
 

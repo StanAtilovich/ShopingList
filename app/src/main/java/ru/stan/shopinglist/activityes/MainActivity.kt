@@ -11,7 +11,7 @@ import ru.stan.shopinglist.fragments.NoteFragment
 import ru.stan.shopinglist.fragments.ShopListNameFragment
 
 class MainActivity : AppCompatActivity(), NewListDialog.Listener {
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)

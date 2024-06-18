@@ -25,6 +25,7 @@ import ru.stan.shopinglist.entities.NoteItem
 import ru.stan.shopinglist.fragments.NoteFragment
 import ru.stan.shopinglist.utils.HtmlManager
 import ru.stan.shopinglist.utils.MyTouchListener
+import ru.stan.shopinglist.utils.TimeManager
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -151,17 +152,14 @@ class NewNoteActivity : AppCompatActivity() {
         finish()
     }
 
-    private fun getCurrentTime(): String {
-        val formatter = SimpleDateFormat("hh:mm:ss - yyyy/MM/dd", Locale.getDefault())
-        return formatter.format(Calendar.getInstance().time)
-    }
+
 
     private fun createNewNote(): NoteItem {
         return NoteItem(
             null,
             binding.edTitle.text.toString(),
             HtmlManager.toHtml(binding.edDiscription.text),
-            getCurrentTime(),
+           TimeManager.getCurrentTime(),
             ""
         )
     }
